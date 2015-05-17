@@ -7,19 +7,69 @@ output:
 
 
 ## Loading and preprocessing the data
-
+```{r}
+data <- read.csv(unzip("activity.zip"))
+```
 
 
 ## What is mean total number of steps taken per day?
+```{r}
+ds = tapply(data$steps, data$date, sum, na.rm = TRUE )
+hist( ds
+    , col = "red"
+    , main = "Histogram of daily steps"
+    , xlab = "Steps per day"
+    , breaks = 25
+    , xlim = c(0,25000)
+    )
+mean(ds)
+median(ds)
 
+```
 
 
 ## What is the average daily activity pattern?
+```{r}
+is = tapply(data$steps, data$interval, mean, na.rm = TRUE )
+plot( is
+    , col = "blue"
+    , main = ""
+    , xlab = "Intervals"
+    , ylab = "Average number of steps"
+    , type = "l"
+    , lwd = 2
+    )
 
+# The maximum value is:
+max(is)
+
+# The first value is the starting time of the interval in a given day, the second is the index of the interval 
+which.max(is)
+
+# To doublecheck:
+is[104]
+```
 
 
 ## Imputing missing values
+```{r}
+# Total number of rows with NA
+length(data$step[is.na(data$step)])
 
-
+# Replacing NAs with the overall mean steps by respective intervals.
+cond = is.na(data$step)
+i = data$interval[cond]
+data$steps[cond] = is[as.character(i)]
+ds = tapply(data$steps, data$date, sum, na.rm = TRUE )
+hist( ds
+    , col = "red"
+    , main = "Histogram of daily steps"
+    , xlab = "Steps per day"
+    , breaks = 25
+    , xlim = c(0,25000)
+    )
+mean(ds)
+median(ds)
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
