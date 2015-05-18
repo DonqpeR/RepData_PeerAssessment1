@@ -136,3 +136,38 @@ median(ds)
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+
+
+```r
+# Creating a new factor variable and setting the values based on the date
+wd <- c("Mon","Tue", "Wed", "Thu", "Fri")
+we <- c("Sat","Sun")
+data$day  <-  factor (c("weekday", "weekend"))
+data$day[weekdays(strptime(data$date,"%Y-%m-%d"), abbreviate = TRUE) %in% wd] <- "weekday"
+data$day[weekdays(strptime(data$date,"%Y-%m-%d"), abbreviate = TRUE) %in% we] <- "weekend"
+```
+
+
+
+
+```r
+xyplot( data$steps ~ data$interval | data$day
+      , xlab = "Interval"
+      , ylab = "Number of steps"
+      , layout = c(1:2)
+      , ylim = 0:max(is)*1.2
+      , panel = function(x, y, ...) {
+#                panel.xyplot(x, y, ...)
+                panel.average( x, y
+                             , type="l"
+                             , col="lightblue"
+                             , lwd=2
+                             , horizontal = FALSE
+                             , ...
+                             )
+                }
+      )
+```
+
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) 
