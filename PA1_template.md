@@ -22,7 +22,7 @@ hist( ds
     , main = "Histogram of daily steps"
     , xlab = "Steps per day"
     , breaks = 25
-    , xlim = c(0,25000)
+    , xlim = c(0, 25000)
     )
 ```
 
@@ -113,7 +113,7 @@ hist( ds
     , main = "Histogram of daily steps"
     , xlab = "Steps per day"
     , breaks = 25
-    , xlim = c(0,25000)
+    , xlim = c(0, 25000)
     )
 ```
 
@@ -158,7 +158,6 @@ xyplot( data$steps ~ data$interval | data$day
       , layout = c(1:2)
       , ylim = 0:max(is)*1.2
       , panel = function(x, y, ...) {
-#                panel.xyplot(x, y, ...)
                 panel.average( x, y
                              , type="l"
                              , col="lightblue"

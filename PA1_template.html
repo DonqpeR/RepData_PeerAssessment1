@@ -214,7 +214,7 @@ hist( ds
     , main = &quot;Histogram of daily steps&quot;
     , xlab = &quot;Steps per day&quot;
     , breaks = 25
-    , xlim = c(0,25000)
+    , xlim = c(0, 25000)
     )
 </code></pre>
 
@@ -289,7 +289,7 @@ hist( ds
     , main = &quot;Histogram of daily steps&quot;
     , xlab = &quot;Steps per day&quot;
     , breaks = 25
-    , xlim = c(0,25000)
+    , xlim = c(0, 25000)
     )
 </code></pre>
 
@@ -323,7 +323,6 @@ data$day[weekdays(strptime(data$date,&quot;%Y-%m-%d&quot;), abbreviate = TRUE) %
       , layout = c(1:2)
       , ylim = 0:max(is)*1.2
       , panel = function(x, y, ...) {
-#                panel.xyplot(x, y, ...)
                 panel.average( x, y
                              , type=&quot;l&quot;
                              , col=&quot;lightblue&quot;
